@@ -1,0 +1,89 @@
+{% extends "account/base.html" %}
+{% load bootstrap4 %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block subtitle %}
+  Signup below
+{% endblock %}
+
+{% block content %}
+
+<p class="text-center">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="form-signin" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+
+<div class="form-control">
+      <h5 class="title">PERSONAL INFORMATION</h5>
+      <hr>
+      {% if form.error %}
+      <small class="form-control-feedback">{{ form.non_field_errors }}</small>
+      {% endif %}
+
+            <div class="form-group has-danger">
+                <label class="control-label" for="{{ form.first_name.id_for_label }}">First Name</label>
+                <div class="text-center">
+                {{form.first_name}}
+                </div>
+                <small class="form-control-feedback">{{ form.first_name.errors }}</small>
+            </div>
+
+              <div class="form-group has-danger">
+                  <label class="control-label" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                  <div class="text-center">
+                  {{form.last_name}}
+                  </div>
+                  <small class="form-control-feedback">{{ form.last_name.errors }}</small>
+              </div>
+
+            <div class="form-group has-danger">
+                <label class="control-label" for="{{ form.email.id_for_label }}">Email</label>
+                <div class="text-center">
+                {{form.email}}
+                </div>
+                <small class="form-control-feedback">{{ form.email.errors }}</small>
+            </div>
+
+              <div class="form-group has-danger">
+                  <label class="control-label" for="{{ form.username.id_for_label }}">Username</label>
+                  <div class="text-center">
+                  {{form.username}}
+                  </div>
+                  <small class="form-control-feedback">{{ form.username.errors }}</small>
+                </div>
+
+              <div class="form-group has-danger">
+                  <label class="control-label" for="{{ form.password1.id_for_label }}">Password</label>
+                  <div class="text-center">
+                  {{form.password1}}
+                  </div>
+                  <small class="form-control-feedback">{{ form.password1.errors }}</small>
+              </div>
+
+              <div class="form-group has-danger">
+                    <label class="control-label" for="{{ form.password2.id_for_label }}">Password Again</label>
+                    <div class="text-center">
+                    {{form.password2}}
+                    </div>
+                      <small class="form-control-feedback">{{ form.password2.errors }}</small>
+              </div>
+             <div class="form-group has-danger">
+                    <label class="control-label" for="{{ form.captcha.id_for_label }}">Are you human?</label>
+                      <div class="text-center">
+                      {{form.captcha}}
+                      </div>
+
+                    <small class="form-control-feedback">{{ form.captcha.errors }}</small>
+              </div>
+
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>{% trans "Sign Up" %} &raquo;</button>
+</div>
+</form>
+
+{% endblock %}

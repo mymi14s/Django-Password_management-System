@@ -1,0 +1,73 @@
+{% extends "base_template/base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% block title %}
+Detail
+{% endblock %}
+
+{% block content %}
+{% if object.value %}
+<div class="app-title">
+        <div class="">
+          <h2><i class="fa fa-th-list"></i>Details</h2>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"><a href="{% url 'index'%}"></a></i></li>
+          <li class="breadcrumb-item"><a href="{% url 'manager:home' %}">Websites</a></li>
+
+        </ul>
+      </div>
+
+        <div class="col-md-12">
+          <div class="tile">
+
+            <h4 class="">{{obj.website_name}}</h4>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>TAG</th>
+                  <th>INFO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Login</b></td>
+                  <td><a href="{{obj.website_link}}" target="_blank" rel="noopener noreferrer">Visit Website</a></td>
+                </tr>
+                <tr>
+                  <td><b>Username</b></td>
+                  <td>{{obj.username}}</td>
+                </tr>
+                <tr>
+                  <td><b>Password</b></td>
+                  <td>{{obj.password}}</td>
+                </tr>
+                <tr>
+                  <td><b>Edit</b></td>
+                  <td><a href="{% url 'manager:update' pk=obj.id %}">Update</a></td>
+                </tr>
+                <tr>
+                  <td><b>Delete</b></td>
+                  <td><a style="color:red;" href="{% url 'manager:delete' pk=obj.id %}">Delete</a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+{% else %}
+<script type="text/javascript">
+  window.location = "{% url 'manager:home' %}"
+</script>
+{% endif %}
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'base_static/js/plugins/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'base_static/js/plugins/dataTables.bootstrap.min.js' %}"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

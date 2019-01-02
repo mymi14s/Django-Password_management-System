@@ -1,0 +1,67 @@
+{% extends "base_template/base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% block title %}
+Website List
+{% endblock %}
+
+{% block content %}
+
+<div class="app-title">
+        <div>
+          <h1><i class="fa fa-th-list"></i>Website List</h1>
+          <p></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item"><a href="{% url 'user:home' %}"><i class="fa fa-home fa-lg"></i></a></li>
+          <li class="breadcrumb-item"><a href="{% url 'manager:home' %}">Website</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'manager:create' %}">Add</a></li>
+
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-sm-3">
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="sampleTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Website</th>
+                    <th>Link</th>
+<!--                    <th>Username</th>
+                    <th>Password</th> -->
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for obj in object_list  %}
+                  <tr>
+                    <td>{{obj.sn}}</td>
+                    <td><a href="{{obj.get_absolute_url}}">{{obj.website_name}}</a></td>
+                    <td><a href="{{obj.get_absolute_url}}">{{obj.website_link}}</a></td>
+                  <!--  <td>{{obj.username}}</td>
+                    <td>{{obj.password}}</td> -->
+                    <td><a href="{% url 'manager:update' pk=obj.id %}">Update</a></td>
+                    <td><a style="color:red;" href="{% url 'manager:delete' pk=obj.id %}">Delete</a></td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Google analytics script-->
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'base_static/js/plugins/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'base_static/js/plugins/dataTables.bootstrap.min.js' %}"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

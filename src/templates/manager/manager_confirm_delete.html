@@ -1,0 +1,40 @@
+{% extends "base_template/base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% block title %}
+Delete
+{% endblock %}
+
+{% block content %}
+
+<div class="app-title">
+        <div>
+          <h1><i class="fa fa-edit"></i>Delete Website</h1>
+          <p></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"><a href="{% url 'index'%}"></a></i></li>
+          <li class="breadcrumb-item"><a href="{% url 'manager:home'%}">Delete</a></li>
+
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Delete Website</h3>
+            <div class="tile-body">
+              <form method="post">{% csrf_token %}
+                <p>Are you sure you want to delete "{{ object.website_name }} from your account?"?</p>
+                <button class="btn btn-danger" type="submit">Confirm</button>
+            </form>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="clearix"></div>
+
+      </div>
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base_template/base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% load class_name %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="row user">
+  <div class="col-md-12">
+    <div class="profile">
+      <div class="info">
+        {% if request.user.photo %}
+        <img class="user-img" src="{{request.user.profile.photo.url}}" heigth="128" width="128">
+        {% else %}
+        <img class="user-img" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg" heigth="128" width="128">
+         {% endif %}
+        <h4>{{request.user.last_name}} {{request.user.first_name}}</h4>
+        <p>{{request.user.email}}</p>
+      </div>
+      <div class="cover-image"></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="tile p-0">
+      <ul class="nav flex-column nav-tabs user-tabs">
+
+        <li class="nav-item"><a class="nav-link" href="{% url 'user:profile' slug=request.user %}">Edit Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'account_email' %}" >Change Email</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'account_change_password' %}" >Change Password</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'socialaccount_connections' %}" >Social Accounts</a></li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="tab-content">
+      <div class="tab-pane active" id="user-timeline">
+        <div class="timeline-post">
+          <h4 class="line-head">Edit Profile</h4>
+          <form method="post" class="form-horizontal form-material" enctype="multipart/form-data"> {% csrf_token %}
+
+            <div class="row mb-8">
+              <div class="col-md-8">
+                {% bootstrap_form form %}
+                {% if request.user.profile.photo %}
+                <img style="align:center" src="{{request.user.profile.photo.url}}" height="100" width="100" alt="Current photo">
+                {% else %}
+                <img style="align:center" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" height="100" width="100" alt="Current photo">
+                {% endif %}
+              </div>
+
+            </div>
+            <br>
+            <div class="row mb-10">
+              <div class="col-md-12">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- The javascript plugin to display page loading on top-->
+<script src="{% static 'base_static/js/plugins/pace.min.js' %}"></script>
+
+{% endblock %}

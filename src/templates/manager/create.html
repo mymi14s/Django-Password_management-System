@@ -1,0 +1,44 @@
+{% extends "base_template/base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% block title %}
+Add Website
+{% endblock %}
+
+{% block content %}
+
+<div class="app-title">
+        <div>
+          <h1><i class="fa fa-edit"></i>Add Website</h1>
+          <p></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"><a href="{% url 'index'%}"></a></i></li>
+          <li class="breadcrumb-item"><a href="{% url 'manager:home'%}">Websites</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Add Website</h3>
+            <div class="tile-body">
+              <form method="POST"> {% csrf_token %}
+                <div class="form-group">
+                  {%bootstrap_form form%}
+                </div>
+                <div class="tile-footer">
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="{% url 'manager:home' %}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="clearix"></div>
+
+      </div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

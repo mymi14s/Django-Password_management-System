@@ -1,0 +1,27 @@
+{% extends "user/base_profile.html" %}
+{% load bootstrap4 %}
+{% block updateprofile %}
+<h4 class="line-head">Edit Information</h4>
+<form method="post" class="form-horizontal form-material" enctype="multipart/form-data"> {% csrf_token %}
+
+  <div class="row mb-8">
+    <div class="col-md-8">
+      {% bootstrap_form form %}
+      {% if request.user.profile.photo %}
+      <img style="align:center" src="{{request.user.profile.photo.url}}" height="100" width="100" alt="Current photo">
+      {% else %}
+      <img style="align:center" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" height="100" width="100" alt="Current photo">
+      {% endif %}
+    </div>
+
+  </div>
+  <br>
+  <div class="row mb-10">
+    <div class="col-md-12">
+      <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
